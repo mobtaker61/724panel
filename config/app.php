@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'tr',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,8 +108,23 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'tr_TR',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Available locales
+    |--------------------------------------------------------------------------
+    |
+    | List all locales that your application works with
+    |
+    */
+
+    'available_locales' => [
+        'English' => ['en','us'],
+        'Turkish' => ['tr','tr'],
+        'Persian' => ['fa','ir'],
+        'Arabic' =>  ['ar','sa'],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -181,6 +196,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -209,7 +225,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        // custom theme helper
+        'Helper' => App\Helpers\Helpers::class,
+
     ])->toArray(),
 
 ];

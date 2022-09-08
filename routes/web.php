@@ -1,6 +1,9 @@
 <?php
 
+
+use App\Http\Controllers\Panel\PanelController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
+Route::get('/', function () {return view('welcome');})->name('home');
+
+//Admin Panel
+Route::prefix('Admin')->namespace('Admin')->middleware('auth')->group(function (){});
+
+//User Panel
+Route::prefix('Panel')->namespace('Panel')->middleware('auth')->group(function (){
+    Route::get('/', [PanelController::class,'index'])->name('panel');
+
 });
